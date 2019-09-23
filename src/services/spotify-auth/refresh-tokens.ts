@@ -1,4 +1,4 @@
-import { SECRETS } from "../secrets";
+import { SECRETS } from "../../../secrets";
 import { getUserData, setUserData } from "./async-storage";
 import { getTokens } from "./get-tokens";
 

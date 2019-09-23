@@ -1,5 +1,5 @@
 import { AuthSession } from "expo";
-import { SECRETS } from "../secrets";
+import { SECRETS } from "../../../secrets";
 
 const scopesArr = [
   "user-modify-playback-state",

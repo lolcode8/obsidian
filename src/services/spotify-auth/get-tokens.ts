@@ -2,7 +2,7 @@ import { encode as btoa } from "base-64";
 
 import { setUserData } from "./async-storage";
 import { getAuthorizationCode } from "./get-auth-code";
-import { SECRETS } from "../secrets";
+import { SECRETS } from "../../../secrets";
 
 export const getTokens = async () => {
   try {

@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 
-import { refreshTokens } from "./src/refresh-tokens";
-import { getUserData } from "./src/async-storage";
-import { getUserPlaylists } from "./src/get-user-playlists";
+import { refreshTokens } from "./src/services/spotify-auth/refresh-tokens";
+import { getUserData } from "./src/services/spotify-auth/async-storage";
+import { getUserPlaylists } from "./src/services/spotify-auth/get-user-playlists";
 
 export default class App extends React.Component {
   async componentDidMount() {
