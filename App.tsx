@@ -1,32 +1,37 @@
-import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import React, { useEffect } from "react";
+import { StyleSheet, Text, View, Button, processColor } from "react-native";
 
 import { refreshTokens } from "./src/services/spotify-auth/refresh-tokens";
 import { getUserData } from "./src/services/spotify-auth/async-storage";
 import { getUserPlaylists } from "./src/services/spotify-auth/get-user-playlists";
+import { environmentVariable } from "./src/utils/env-vars";
 
-export default class App extends React.Component {
-  async componentDidMount() {
-    const tokenExpirationTime = await getUserData("expirationTime");
+const App = () => {
+  useEffect(() => {
+    const fetchTokens = async () => {
+      const tokenExpirationTime = await getUserData("expirationTime");
+      if (!tokenExpirationTime || new Date().getTime() > tokenExpirationTime) {
+        await refreshTokens();
+      }
+      // Else it means you already have the tokens
+    };
 
-    if (!tokenExpirationTime || new Date().getTime() > tokenExpirationTime) {
-      await refreshTokens();
-    } else {
-      this.setState({ accessTokenAvailable: true });
-    }
-  }
+    fetchTokens();
+  });
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.tsx to start working on your app!</Text>
-        <View>
-          <Button title={"Press mee pls"} onPress={() => getUserPlaylists()} />
-        </View>
+  return (
+    <View style={styles.container}>
+      <View>
+        <Button
+          title={"Press me to fetch a list of playlists"}
+          onPress={() => getUserPlaylists()}
+        />
       </View>
-    );
-  }
-}
+    </View>
+  );
+};
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {

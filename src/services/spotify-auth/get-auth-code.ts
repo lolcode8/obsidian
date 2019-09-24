@@ -18,8 +18,8 @@ const scopes = scopesArr.join(" ");
 
 export const getAuthorizationCode = async () => {
   try {
-    const credentials = SECRETS; //we wrote this function above
-    const redirectUrl = AuthSession.getRedirectUrl(); //this will be something like https://auth.expo.io/@your-username/your-app-slug
+    const credentials = SECRETS;
+    const redirectUrl = AuthSession.getRedirectUrl();
     const result = await AuthSession.startAsync({
       authUrl:
         "https://accounts.spotify.com/authorize" +
