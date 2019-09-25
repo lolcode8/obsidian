@@ -1,4 +1,4 @@
-import { CLIENT_ID, CLIENT_SECRET, REDIRECT_URL } from "react-native-dotenv"; // eslint-disable-line
+import { CLIENT_ID, CLIENT_SECRET, REDIRECT_URL } from "react-native-dotenv";
 
 const AVAILABLE_VARIABLES = {
   CLIENT_ID,
