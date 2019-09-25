@@ -1,11 +1,11 @@
-import { getValidSPObj } from "./get-valid-spotify-object";
+import { fetchUserProfile } from "./../spotify-requests/user";
+import { fetchPlaylistsForUser } from "./../spotify-requests/playlists";
+import { ID } from "../../api-transform/user";
 
 export const getUserPlaylists = async () => {
-  const sp = await getValidSPObj();
-  console.log("SP: ", sp);
-  const { id: userId } = await sp.getMe();
-  console.log("userId", userId);
-  const { items: playlists } = await sp.getUserPlaylists(userId, { limit: 50 });
-  console.log("playlists", playlists);
-  return playlists;
+  const userProfile = await fetchUserProfile();
+
+  const userId = userProfile.data[ID];
+  const playlistsForUser = await fetchPlaylistsForUser({ userId });
+  console.log("playlistsForUser", playlistsForUser);
 };
