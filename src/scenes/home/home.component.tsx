@@ -1,11 +1,21 @@
-import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import React, { useEffect } from "react";
+import { StyleSheet, View, Button } from "react-native";
+
+import { fetchTokensForApp } from "../../services/spotify-auth/refresh-tokens";
+import { getUserPlaylists } from "../../services/spotify-auth/get-user-playlists";
 
 const Home = () => {
+  useEffect(() => {
+    fetchTokensForApp();
+  });
+
   return (
     <View style={styles.container}>
       <View>
-        <Text> HELLO THIS IS Home PAGE</Text>
+        <Button
+          title={"Press me to fetch a list of playlists"}
+          onPress={getUserPlaylists}
+        />
       </View>
     </View>
   );
