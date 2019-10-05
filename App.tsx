@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
-import { StyleSheet, View, Button } from "react-native";
+import React from "react";
 import { createAppContainer } from "react-navigation";
+import { StyleSheet, View, Button } from "react-native";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 
-import { fetchTokensForApp } from "./src/services/spotify-auth/refresh-tokens";
-import { getUserPlaylists } from "./src/services/spotify-auth/get-user-playlists";
 import Home from "./src/scenes/home/home.component";
-import Discover from "./src/scenes/discover/discover.component";
 import Profile from "./src/scenes/profile/profile.component";
+import Discover from "./src/scenes/discover/discover.component";
+
 import { SCENE_IDS } from "./src/navigation/scene-identifiers";
+import { getUserPlaylists } from "./src/services/spotify-auth/get-user-playlists";
 
 const App = () => {
   return (

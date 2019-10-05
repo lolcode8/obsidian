@@ -1,19 +1,24 @@
-import React, { useEffect } from "react";
-import { StyleSheet, View, Button } from "react-native";
+import React, { useContext } from "react";
+import { StyleSheet, View } from "react-native";
+import { ThemeProvider, Button } from "react-native-elements";
 
-import { fetchTokensForApp } from "../../services/spotify-auth/refresh-tokens";
 import { getUserPlaylists } from "../../services/spotify-auth/get-user-playlists";
+import { AppThemeContext } from "../../styles/themes";
 
 const Home = () => {
+  const AppTheme = useContext(AppThemeContext);
+
   return (
-    <View style={styles.container}>
-      <View>
-        <Button
-          title={"Press me to fetch a list of playlists"}
-          onPress={getUserPlaylists}
-        />
+    <ThemeProvider theme={AppTheme}>
+      <View style={styles.container}>
+        <View>
+          <Button
+            title={"Press me to fetch a list of playlists"}
+            // onPress={getUserPlaylists}
+          />
+        </View>
       </View>
-    </View>
+    </ThemeProvider>
   );
 };
 
