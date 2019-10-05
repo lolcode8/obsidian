@@ -8,12 +8,9 @@ import { getUserPlaylists } from "./src/services/spotify-auth/get-user-playlists
 import Home from "./src/scenes/home/home.component";
 import Discover from "./src/scenes/discover/discover.component";
 import Profile from "./src/scenes/profile/profile.component";
+import { SCENE_IDS } from "./src/navigation/scene-identifiers";
 
 const App = () => {
-  useEffect(() => {
-    fetchTokensForApp();
-  });
-
   return (
     <View style={styles.container}>
       <View>
@@ -27,9 +24,9 @@ const App = () => {
 };
 
 const TabNavigator = createBottomTabNavigator({
-  Home: Home,
-  Discover: Discover,
-  Profile: Profile
+  [SCENE_IDS.HOME]: Home,
+  [SCENE_IDS.DISCOVER]: Discover,
+  [SCENE_IDS.PROFILE]: Profile
 });
 
 export default createAppContainer(TabNavigator);

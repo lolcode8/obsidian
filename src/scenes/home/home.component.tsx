@@ -5,10 +5,6 @@ import { fetchTokensForApp } from "../../services/spotify-auth/refresh-tokens";
 import { getUserPlaylists } from "../../services/spotify-auth/get-user-playlists";
 
 const Home = () => {
-  useEffect(() => {
-    fetchTokensForApp();
-  });
-
   return (
     <View style={styles.container}>
       <View>
