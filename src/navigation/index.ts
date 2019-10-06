@@ -1,32 +1,15 @@
-// Import home navigator
-// Import profile navigator
+import { createSwitchNavigator } from "react-navigation";
 
-export const Routes = AppRoutes;
+import { SCENE_IDS } from "./scene-identifiers";
+import { LandingNavigator } from "./landing-navigator";
+import { LoggedInNavigator } from "./logged-in-navigator";
 
 export const AppNavigator = createSwitchNavigator(
   {
-    [Routes.LOGIN_PAGE]: { screen: authNavigator },
-
-    [Routes.LOGGED_IN_AGENT]: LoggedInTabNavigators.Agent,
-    [Routes.LOGGED_IN_CONSUMER]: LoggedInTabNavigators.Consumer
-
-    // test: CreateProposal.StandardProposal.Sell.SelectCommissions //implement your scene here to test, without having to navigate the app
+    [SCENE_IDS.LANDING_NAVIGATOR]: LandingNavigator,
+    [SCENE_IDS.LOGGED_IN_NAVIGATOR]: LoggedInNavigator
   },
   {
-    initialRouteName: Routes.LOGIN_PAGE
-
-    // initialRouteName: "test" // un-comment to access you test component
-  }
-);
-
-export const NotificationNavigator = createSwitchNavigator(
-  {
-    [Routes.NOTIFICATION_LANDING]: NotificationLanding,
-    [Routes.LOGIN_PAGE]: { screen: authNavigator },
-    [Routes.LOGGED_IN_AGENT]: LoggedInTabNavigators.Agent,
-    [Routes.LOGGED_IN_CONSUMER]: LoggedInTabNavigators.Consumer
-  },
-  {
-    initialRouteName: Routes.NOTIFICATION_LANDING
+    initialRouteName: SCENE_IDS.LANDING_NAVIGATOR
   }
 );
