@@ -6,5 +6,3 @@ export const AppThemeContext = React.createContext({
   Button: BUTTON_THEME,
   Avatar: AVATAR_THEME
 });
-
-// export const AppThemeContextProvider = AppThemeContext.Provider;

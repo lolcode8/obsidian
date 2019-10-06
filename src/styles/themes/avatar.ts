@@ -1,3 +1,3 @@
 export const AVATAR_THEME = {
-  raised: true
+  // Setup code here
 };
