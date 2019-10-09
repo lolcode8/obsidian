@@ -1,6 +1,7 @@
+import { environmentVariable } from "Utils/env-vars.utils"; 
+
 import { getUserData, setUserData } from "./async-storage";
 import { getAuthorizationCode } from "./get-auth-code";
-import { environmentVariable } from "../../utils/env-vars.utils";
 
 export const refreshTokens = async () => {
   try {

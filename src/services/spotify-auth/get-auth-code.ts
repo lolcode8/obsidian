@@ -1,5 +1,6 @@
 import { AuthSession } from "expo";
-import { environmentVariable } from "../../utils/env-vars.utils";
+
+import { environmentVariable } from "Utils/env-vars.utils";
 
 const scopesArr = [
   "user-modify-playback-state",

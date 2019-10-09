@@ -1,7 +1,8 @@
 import { createSwitchNavigator } from "react-navigation";
 
+import Home from "Scenes/Home/home.component";
+
 import { SCENE_IDS } from "../scene-identifiers";
-import Home from "../../scenes/home/home.component";
 
 const HomeNavigator = createSwitchNavigator(
   {

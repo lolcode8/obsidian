@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { getAccessTokens } from "./../../utils/api-calls.utils";
+import { getAccessTokens } from "Utils/api-calls.utils";
 
 export const fetchPlaylistsForUser = async ({ userId }) => {
   const accessToken = await getAccessTokens();

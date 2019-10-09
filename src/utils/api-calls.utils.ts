@@ -1,5 +1,5 @@
-import { refreshTokens } from "./../services/spotify-auth/refresh-tokens";
-import { getUserData } from "./../services/spotify-auth/async-storage";
+import { refreshTokens } from "Services/spotify-auth/refresh-tokens";
+import { getUserData } from "Services/spotify-auth/async-storage";
 
 export const getAccessTokens = async () => {
   // First get the userID

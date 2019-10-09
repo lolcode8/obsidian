@@ -1,7 +1,8 @@
 import { createSwitchNavigator } from "react-navigation";
 
-import { SCENE_IDS } from "../scene-identifiers";
-import Profile from "../../scenes/profile/profile.component";
+import Profile from "Scenes/Profile/profile.component";
+
+import { SCENE_IDS } from "../scene-identifiers"; 
 
 const ProfileNavigator = createSwitchNavigator(
   {

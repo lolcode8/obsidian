@@ -1,8 +1,8 @@
 import { createSwitchNavigator } from "react-navigation";
 
+import { LandingNavigator } from "./Landing-navigator";
+import { LoggedInNavigator } from "./Logged-in-navigator";
 import { SCENE_IDS } from "./scene-identifiers";
-import { LandingNavigator } from "./landing-navigator";
-import { LoggedInNavigator } from "./logged-in-navigator";
 
 export const AppNavigator = createSwitchNavigator(
   {

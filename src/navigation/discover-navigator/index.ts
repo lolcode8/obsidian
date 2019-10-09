@@ -1,7 +1,8 @@
 import { createSwitchNavigator } from "react-navigation";
 
+import Discover from "Scenes/Discover/discover.component";
+
 import { SCENE_IDS } from "../scene-identifiers";
-import Discover from "../../scenes/discover/discover.component";
 
 const DiscoverNavigator = createSwitchNavigator(
   {

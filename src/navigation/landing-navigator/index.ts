@@ -1,7 +1,8 @@
 import { createSwitchNavigator } from "react-navigation";
 
+import Landing from "Scenes/Landing/landing.component";
+
 import { SCENE_IDS } from "../scene-identifiers";
-import Landing from "../../scenes/landing/landing.component";
 
 export const LandingNavigator = createSwitchNavigator(
   {

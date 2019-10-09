@@ -1,6 +1,6 @@
 import { CLIENT_ID, CLIENT_SECRET, REDIRECT_URL } from "react-native-dotenv";
 
-const AVAILABLE_VARIABLES = {
+const AVAILABLE_VARIABLES = { 
   CLIENT_ID,
   CLIENT_SECRET,
   REDIRECT_URL

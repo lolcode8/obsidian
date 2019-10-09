@@ -1,9 +1,8 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text } from "react-native";  
 import { Button } from "react-native-elements";
 import { SwitchActions } from "react-navigation";
-import { SCENE_IDS } from "../../navigation/scene-identifiers";
-import { LoggedInNavigator } from "../../navigation/logged-in-navigator";
+import { SCENE_IDS } from "../../Navigation/scene-identifiers";
 
 const Landing = ({ screenProps, navigation }) => {
   //TODO: Refactor this + Send to the spotify auth page

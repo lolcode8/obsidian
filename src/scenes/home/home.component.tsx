@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import { StyleSheet, View } from "react-native";
 import { ThemeProvider, Button } from "react-native-elements";
 
-import { getUserPlaylists } from "../../services/spotify-auth/get-user-playlists";
-import { AppThemeContext } from "../../styles/themes";
+import { AppThemeContext } from "Styles/Themes";
+import { getUserPlaylists } from "Services/Spotify-auth/get-user-playlists";
 
 const Home = () => {
   const AppTheme = useContext(AppThemeContext);
