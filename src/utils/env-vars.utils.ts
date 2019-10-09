@@ -6,7 +6,7 @@ const AVAILABLE_VARIABLES = {
   REDIRECT_URL
 };
 
-export const environmentVariable = (query: string) => {
+export const environmentVariable = ({ query }) => {
   if (typeof AVAILABLE_VARIABLES[query] === "undefined") {
     return false;
   } else if (AVAILABLE_VARIABLES[query].toLowerCase() === "true") {

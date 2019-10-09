@@ -1,5 +1,5 @@
 import { AuthSession } from "expo";
-import { SECRETS } from "../../../secrets";
+import { environmentVariable } from "../../utils/env-vars.utils";
 
 const scopesArr = [
   "user-modify-playback-state",
@@ -18,14 +18,13 @@ const scopes = scopesArr.join(" ");
 
 export const getAuthorizationCode = async () => {
   try {
-    const credentials = SECRETS;
     const redirectUrl = AuthSession.getRedirectUrl();
     const result = await AuthSession.startAsync({
       authUrl:
         "https://accounts.spotify.com/authorize" +
         "?response_type=code" +
         "&client_id=" +
-        credentials.clientId +
+        environmentVariable({ query: "CLIENT_ID" }) +
         (scopes ? "&scope=" + encodeURIComponent(scopes) : "") +
         "&redirect_uri=" +
         encodeURIComponent(redirectUrl)

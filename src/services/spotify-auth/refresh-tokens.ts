@@ -1,12 +1,13 @@
-import { SECRETS } from "../../../secrets";
 import { getUserData, setUserData } from "./async-storage";
 import { getAuthorizationCode } from "./get-auth-code";
+import { environmentVariable } from "../../utils/env-vars.utils";
 
 export const refreshTokens = async () => {
   try {
-    const credentials = SECRETS;
     const credsB64 = btoa(
-      `${credentials.clientId}:${credentials.clientSecret}`
+      `${environmentVariable({ query: "CLIENT_ID" })}:${environmentVariable({
+        query: "CLIENT_SECRET"
+      })}`
     );
     const refreshToken = await getUserData("refreshToken");
     const response = await fetch("https://accounts.spotify.com/api/token", {
@@ -50,9 +51,10 @@ export const fetchTokensForApp = async () => {
 const getTokens = async () => {
   try {
     const authorizationCode = await getAuthorizationCode(); //we wrote this function above
-    const credentials = SECRETS;
     const credsB64 = btoa(
-      `${credentials.clientId}:${credentials.clientSecret}`
+      `${environmentVariable({ query: "CLIENT_ID" })}:${environmentVariable({
+        query: "CLIENT_SECRET"
+      })}`
     );
     const response = await fetch("https://accounts.spotify.com/api/token", {
       method: "POST",
@@ -60,7 +62,9 @@ const getTokens = async () => {
         Authorization: `Basic ${credsB64}`,
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      body: `grant_type=authorization_code&code=${authorizationCode}&redirect_uri=${credentials.redirectUri}`
+      body: `grant_type=authorization_code&code=${authorizationCode}&redirect_uri=${environmentVariable(
+        { query: "REDIRECT_URL" }
+      )}`
     });
     const responseJson = await response.json();
     // destructure the response and rename the properties to be in camelCase to satisfy my linter ;)
