@@ -1,12 +1,22 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { Button } from "react-native-elements";
+import { SwitchActions } from "react-navigation";
+import { SCENE_IDS } from "../../navigation/scene-identifiers";
+import { LoggedInNavigator } from "../../navigation/logged-in-navigator";
 
-const Landing = () => {
+const Landing = ({ screenProps, navigation }) => {
+  //TODO: Refactor this + Send to the spotify auth page
+  const handleGetStartedPress = () => {
+    navigation.dispatch(
+      SwitchActions.jumpTo({ routeName: SCENE_IDS.LOGGED_IN_NAVIGATOR })
+    );
+  };
+
   return (
     <View style={styles.container}>
       <Text>THIS IS A LANDING PAGE</Text>
-      <Button title="Get Started" />
+      <Button title="Get Started" onPress={handleGetStartedPress} />
       <Text>Please authorize this little app to access your Spotify data</Text>
     </View>
   );
