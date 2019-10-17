@@ -1,3 +1,4 @@
+import { currentDateTimeInUTC } from "./date.utils";
 import { refreshTokens } from "Services/Spotify-auth/refresh-tokens";
 import { getUserDataFromAsyncStorage } from "Services/Spotify-auth/async-storage";
 
@@ -6,7 +7,7 @@ export const getAccessTokens = async () => {
     key: "expirationTime"
   });
 
-  if (new Date().getTime() > tokenExpirationTime) {
+  if (currentDateTimeInUTC() > tokenExpirationTime) {
     await refreshTokens();
   }
 

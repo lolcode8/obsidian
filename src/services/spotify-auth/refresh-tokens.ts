@@ -5,8 +5,9 @@ import {
   setUserDataInAsyncStorage
 } from "./async-storage";
 import { getAuthorizationCode } from "./get-auth-code";
+import { currentDateTimeInUTC } from "Utils/date.utils";
 
-//TODO: Refactor this garbage function
+//TODO: Refactor this garbage to be functional
 export const refreshTokens = async () => {
   try {
     const credsB64 = btoa(
@@ -35,7 +36,7 @@ export const refreshTokens = async () => {
         expires_in: expiresIn
       } = responseJson;
 
-      const expirationTime = new Date().getTime() + expiresIn * 1000;
+      const expirationTime = currentDateTimeInUTC() + expiresIn * 1000;
       await setUserDataInAsyncStorage({
         key: "accessToken",
         value: newAccessToken
@@ -60,7 +61,7 @@ export const fetchTokensForApp = async () => {
   const tokenExpirationTime = await getUserDataFromAsyncStorage({
     key: "expirationTime"
   });
-  if (!tokenExpirationTime || new Date().getTime() > tokenExpirationTime) {
+  if (!tokenExpirationTime || currentDateTimeInUTC() > tokenExpirationTime) {
     await refreshTokens();
   }
   // Else it means you already have the tokens
@@ -92,7 +93,7 @@ const getTokens = async () => {
       expires_in: expiresIn
     } = responseJson;
 
-    const expirationTime = new Date().getTime() + expiresIn * 1000;
+    const expirationTime = currentDateTimeInUTC() + expiresIn * 1000;
 
     await setUserDataInAsyncStorage({ key: "accessToken", value: accessToken });
     await setUserDataInAsyncStorage({
