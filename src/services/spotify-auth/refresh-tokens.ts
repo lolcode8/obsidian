@@ -1,6 +1,9 @@
-import { environmentVariable } from "Utils/env-vars.utils"; 
+import { environmentVariable } from "Utils/env-vars.utils";
 
-import { getUserData, setUserData } from "./async-storage";
+import {
+  getUserDataFromAsyncStorage,
+  setUserDataInAsyncStorage
+} from "./async-storage";
 import { getAuthorizationCode } from "./get-auth-code";
 
 export const refreshTokens = async () => {
@@ -10,7 +13,7 @@ export const refreshTokens = async () => {
         query: "CLIENT_SECRET"
       })}`
     );
-    const refreshToken = await getUserData("refreshToken");
+    const refreshToken = await getUserDataFromAsyncStorage("refreshToken");
     const response = await fetch("https://accounts.spotify.com/api/token", {
       method: "POST",
       headers: {
@@ -30,11 +33,11 @@ export const refreshTokens = async () => {
       } = responseJson;
 
       const expirationTime = new Date().getTime() + expiresIn * 1000;
-      await setUserData("accessToken", newAccessToken);
+      await setUserDataInAsyncStorage("accessToken", newAccessToken);
       if (newRefreshToken) {
-        await setUserData("refreshToken", newRefreshToken);
+        await setUserDataInAsyncStorage("refreshToken", newRefreshToken);
       }
-      await setUserData("expirationTime", expirationTime);
+      await setUserDataInAsyncStorage("expirationTime", expirationTime);
     }
   } catch (err) {
     console.error("Error fetching refresh tokens", err);
@@ -42,7 +45,9 @@ export const refreshTokens = async () => {
 };
 
 export const fetchTokensForApp = async () => {
-  const tokenExpirationTime = await getUserData("expirationTime");
+  const tokenExpirationTime = await getUserDataFromAsyncStorage(
+    "expirationTime"
+  );
   if (!tokenExpirationTime || new Date().getTime() > tokenExpirationTime) {
     await refreshTokens();
   }
@@ -77,9 +82,9 @@ const getTokens = async () => {
 
     const expirationTime = new Date().getTime() + expiresIn * 1000;
 
-    await setUserData("accessToken", accessToken);
-    await setUserData("refreshToken", refreshToken);
-    await setUserData("expirationTime", expirationTime);
+    await setUserDataInAsyncStorage("accessToken", accessToken);
+    await setUserDataInAsyncStorage("refreshToken", refreshToken);
+    await setUserDataInAsyncStorage("expirationTime", expirationTime);
   } catch (err) {
     console.error(err);
   }
