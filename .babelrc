@@ -2,5 +2,23 @@
   "presets": [
     "module:metro-react-native-babel-preset",
     "module:react-native-dotenv"
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["./src"],
+        "extensions": [".js", ".ios.js", ".android.js"],
+        "alias": {
+          "Api-transform": "./src/Api-transform",
+          "Components": "./src/Components",
+          "Scenes": "./src/Scenes",
+          "Services": "./src/Services",
+          "Navigation": "./src/Navigation",
+          "Styles": "./src/Styles",
+          "Utils": "./src/Utils"
+        }
+      }
+    ]
   ]
 }
