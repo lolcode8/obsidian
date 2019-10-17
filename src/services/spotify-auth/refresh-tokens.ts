@@ -6,6 +6,7 @@ import {
 } from "./async-storage";
 import { getAuthorizationCode } from "./get-auth-code";
 
+//TODO: Refactor this garbage function
 export const refreshTokens = async () => {
   try {
     const credsB64 = btoa(
@@ -13,7 +14,9 @@ export const refreshTokens = async () => {
         query: "CLIENT_SECRET"
       })}`
     );
-    const refreshToken = await getUserDataFromAsyncStorage("refreshToken");
+    const refreshToken = await getUserDataFromAsyncStorage({
+      key: "refreshToken"
+    });
     const response = await fetch("https://accounts.spotify.com/api/token", {
       method: "POST",
       headers: {
@@ -33,11 +36,20 @@ export const refreshTokens = async () => {
       } = responseJson;
 
       const expirationTime = new Date().getTime() + expiresIn * 1000;
-      await setUserDataInAsyncStorage("accessToken", newAccessToken);
+      await setUserDataInAsyncStorage({
+        key: "accessToken",
+        value: newAccessToken
+      });
       if (newRefreshToken) {
-        await setUserDataInAsyncStorage("refreshToken", newRefreshToken);
+        await setUserDataInAsyncStorage({
+          key: "refreshToken",
+          value: newRefreshToken
+        });
       }
-      await setUserDataInAsyncStorage("expirationTime", expirationTime);
+      await setUserDataInAsyncStorage({
+        key: "expirationTime",
+        value: expirationTime
+      });
     }
   } catch (err) {
     console.error("Error fetching refresh tokens", err);
@@ -45,9 +57,9 @@ export const refreshTokens = async () => {
 };
 
 export const fetchTokensForApp = async () => {
-  const tokenExpirationTime = await getUserDataFromAsyncStorage(
-    "expirationTime"
-  );
+  const tokenExpirationTime = await getUserDataFromAsyncStorage({
+    key: "expirationTime"
+  });
   if (!tokenExpirationTime || new Date().getTime() > tokenExpirationTime) {
     await refreshTokens();
   }
@@ -73,7 +85,7 @@ const getTokens = async () => {
       )}`
     });
     const responseJson = await response.json();
-    // destructure the response and rename the properties to be in camelCase to satisfy my linter ;)
+
     const {
       access_token: accessToken,
       refresh_token: refreshToken,
@@ -82,9 +94,15 @@ const getTokens = async () => {
 
     const expirationTime = new Date().getTime() + expiresIn * 1000;
 
-    await setUserDataInAsyncStorage("accessToken", accessToken);
-    await setUserDataInAsyncStorage("refreshToken", refreshToken);
-    await setUserDataInAsyncStorage("expirationTime", expirationTime);
+    await setUserDataInAsyncStorage({ key: "accessToken", value: accessToken });
+    await setUserDataInAsyncStorage({
+      key: "refreshToken",
+      value: refreshToken
+    });
+    await setUserDataInAsyncStorage({
+      key: "expirationTime",
+      value: expirationTime
+    });
   } catch (err) {
     console.error(err);
   }

@@ -3,14 +3,17 @@ import { StyleSheet, View } from "react-native";
 import { ThemeProvider, Button } from "react-native-elements";
 
 import { AppThemeContext } from "Styles/Themes";
+import { getAccessTokens } from "Utils/api-calls.utils";
 import { fetchUserPlaylists } from "Services/Spotify-auth/get-user-playlists";
 import {
   fetchUserTopArtists,
   fetchUserTopTracks
 } from "Services/Spotify-requests/user";
 
-const Home = () => {
+//TODO: Remove the async if you are unable to get access tokens
+const Home = async () => {
   const AppTheme = useContext(AppThemeContext);
+  const accessToken = await getAccessTokens();
 
   return (
     <ThemeProvider theme={AppTheme}>
@@ -18,13 +21,16 @@ const Home = () => {
         <View>
           <Button
             title={"Fetch my user profile"}
-            onPress={fetchUserPlaylists}
+            onPress={() => fetchUserPlaylists({ accessToken })}
           />
           <Button
             title={"Fetch my top artists"}
-            onPress={fetchUserTopArtists}
+            onPress={() => fetchUserTopArtists({ accessToken })}
           />
-          <Button title={"Fetch my top tracks"} onPress={fetchUserTopTracks} />
+          <Button
+            title={"Fetch my top tracks"}
+            onPress={() => fetchUserTopTracks({ accessToken })}
+          />
         </View>
       </View>
     </ThemeProvider>
