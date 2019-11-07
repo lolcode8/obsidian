@@ -1,6 +1,7 @@
 import { AsyncStorage } from "react-native";
 
-export const getUserDataFromAsyncStorage = async ({ key }) => {
+//TODO: Check how to handle multiple returns types based on input type in typescript
+export const getUserDataFromAsyncStorage = async ({ key }): Promise<any> => {
   try {
     const result = await AsyncStorage.getItem(key);
     return result;
@@ -9,7 +10,10 @@ export const getUserDataFromAsyncStorage = async ({ key }) => {
   }
 };
 
-export const setUserDataInAsyncStorage = async ({ key, value }) => {
+export const setUserDataInAsyncStorage = async ({
+  key,
+  value
+}): Promise<void> => {
   try {
     const result = await AsyncStorage.setItem(key, value.toString());
     return result;

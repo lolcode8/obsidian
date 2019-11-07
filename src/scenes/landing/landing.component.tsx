@@ -1,15 +1,25 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";  
+import { StyleSheet, View, Text } from "react-native";
 import { Button } from "react-native-elements";
 import { SwitchActions } from "react-navigation";
-import { SCENE_IDS } from "../../Navigation/scene-identifiers";
+
+import { SCENE_IDS } from "Navigation/scene-identifiers";
+import { hasUserBeenAuthenticated } from "Utils/api-calls.utils";
+import { refreshTokens } from "Services/Spotify-auth/refresh-tokens";
 
 const Landing = ({ screenProps, navigation }) => {
-  //TODO: Refactor this + Send to the spotify auth page
+  //TODO: Refactor this
   const handleGetStartedPress = () => {
-    navigation.dispatch(
-      SwitchActions.jumpTo({ routeName: SCENE_IDS.LOGGED_IN_NAVIGATOR })
-    );
+    const isUserAuthenticated = hasUserBeenAuthenticated();
+
+    if (isUserAuthenticated) {
+      navigation.dispatch(
+        SwitchActions.jumpTo({ routeName: SCENE_IDS.LOGGED_IN_NAVIGATOR })
+      );
+    } else {
+      //TODO: Take the user through the spotify auth flow
+      refreshTokens();
+    }
   };
 
   return (
