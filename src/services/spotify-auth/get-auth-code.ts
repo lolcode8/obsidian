@@ -1,21 +1,9 @@
 import { AuthSession } from "expo";
 
 import { environmentVariable } from "Utils/env-vars.utils";
+import { REQUESTED_SCOPES } from "Services/Spotify-auth/spotify-auth.constants";
 
-const scopesArr = [
-  "user-modify-playback-state",
-  "user-read-currently-playing",
-  "user-read-playback-state",
-  "user-library-modify",
-  "user-library-read",
-  "playlist-read-private",
-  "playlist-read-collaborative",
-  "playlist-modify-public",
-  "playlist-modify-private",
-  "user-read-recently-played",
-  "user-top-read"
-];
-const scopes = scopesArr.join(" ");
+const scopes = REQUESTED_SCOPES.join(" ");
 
 export const getAuthorizationCode = async () => {
   try {
