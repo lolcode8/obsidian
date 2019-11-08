@@ -10,7 +10,7 @@ const HomeNavigator = createSwitchNavigator(
   },
   {
     navigationOptions: {
-      header: null
+      headerTitle: "HOME"
     }
   }
 );
