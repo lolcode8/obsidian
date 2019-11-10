@@ -1,27 +1,25 @@
-import React from "react";
-import { View, Text, Image } from "react-native";
+import React, { useEffect } from "react";
+import { View, Text, Image, AsyncStorage } from "react-native";
 import { Button } from "react-native-elements";
 import { SwitchActions } from "react-navigation";
 
 import { SCENE_IDS } from "Navigation/scene-identifiers";
 import { hasUserBeenAuthenticated } from "Utils/api-calls.utils";
-import { refreshTokens } from "Services/Spotify-auth/refresh-tokens";
+import { fetchSpotifyTokens } from "Services/Spotify-auth/spotify-auth-handlers";
 
 import { landingStyles as styles } from "./landing.styles";
 const ObsidianBackground = require("../../../assets/obsidian_background.png");
 
 const Landing = ({ screenProps, navigation }) => {
-  //TODO: Refactor this
-  const handleGetStartedPress = () => {
-    const isUserAuthenticated = hasUserBeenAuthenticated();
+  const handleGetStartedPress = async () => {
+    const isUserAuthenticated = await hasUserBeenAuthenticated();
 
     if (isUserAuthenticated) {
       navigation.dispatch(
         SwitchActions.jumpTo({ routeName: SCENE_IDS.LOGGED_IN_NAVIGATOR })
       );
     } else {
-      //TODO: Take the user through the spotify auth flow
-      refreshTokens();
+      fetchSpotifyTokens();
     }
   };
 
@@ -40,7 +38,6 @@ const Landing = ({ screenProps, navigation }) => {
           buttonStyle={styles.getStartedButton}
         />
       </View>
-      <Text>Please authorize this little app to access your Spotify data</Text>
     </View>
   );
 };

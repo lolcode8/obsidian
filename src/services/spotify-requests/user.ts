@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { extractSpotifyData } from "./../../Utils/data.utils";
-import { getAccessTokens } from "Utils/api-calls.utils";
+import { getAccessToken } from "Utils/api-calls.utils";
 
 //TODO: Refactor to use GraphQL instead of REST
 export const fetchUserProfile = async ({ accessToken }) => {

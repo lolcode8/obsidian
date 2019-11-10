@@ -1,19 +1,10 @@
 import R from "ramda";
 
 import { getUserDataFromAsyncStorage } from "Services/Spotify-auth/async-storage";
-import { refreshTokens } from "Services/Spotify-auth/refresh-tokens";
+import { fetchSpotifyTokens } from "Services/Spotify-auth/spotify-auth-handlers";
 
-import { currentDateTimeInUTC } from "./date.utils";
-
-export const getAccessTokens = async (): Promise<string> => {
-  const tokenExpirationTime = await getUserDataFromAsyncStorage({
-    key: "expirationTime"
-  });
-
-  if (currentDateTimeInUTC() > tokenExpirationTime) {
-    await refreshTokens();
-  }
-
+export const getAccessToken = async (): Promise<String> => {
+  await fetchSpotifyTokens();
   const accessToken = await getUserDataFromAsyncStorage({ key: "accessToken" });
   return accessToken;
 };

@@ -1,13 +1,13 @@
 import axios from "axios";
 
-import { getAccessTokens } from "Utils/api-calls.utils";
+import { getAccessToken } from "Utils/api-calls.utils";
 import { extractSpotifyData } from "Utils/data.utils";
 import { ID } from "Api-transform/user";
 
 import { fetchUserProfile } from "./user";
 
 export const fetchUserPlaylists = async () => {
-  const accessToken = await getAccessTokens();
+  const accessToken = await getAccessToken();
   const userProfile = await fetchUserProfile({ accessToken });
 
   const userId = userProfile.data[ID];
