@@ -3,7 +3,7 @@ import R from "ramda";
 import { getUserDataFromAsyncStorage } from "Services/Spotify-auth/async-storage";
 import { fetchSpotifyTokens } from "Services/Spotify-auth/spotify-auth-handlers";
 
-export const getAccessToken = async (): Promise<String> => {
+export const getAccessToken = async (): Promise<string> => {
   await fetchSpotifyTokens();
   const accessToken = await getUserDataFromAsyncStorage({ key: "accessToken" });
   return accessToken;

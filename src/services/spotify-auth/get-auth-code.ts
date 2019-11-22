@@ -6,7 +6,7 @@ import { REQUESTED_SCOPES } from "Services/Spotify-auth/spotify-auth.constants";
 const scopes = REQUESTED_SCOPES.join(" ");
 
 // To obtain intial access token from the Spotify auth server
-export const getAuthorizationCode = async () => {
+export const getAuthorizationCode = async (): Promise<void> => {
   try {
     console.log("Attempting to get auth code from Spotify");
     const redirectUrl = AuthSession.getRedirectUrl();

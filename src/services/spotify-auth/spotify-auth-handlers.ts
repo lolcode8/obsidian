@@ -8,6 +8,7 @@ import {
   setUserDataInAsyncStorage
 } from "./async-storage";
 
+// Random comment
 export const fetchSpotifyTokens = async () => {
   try {
     const tokenExpirationTime = await getUserDataFromAsyncStorage({
